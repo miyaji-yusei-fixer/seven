@@ -1,5 +1,6 @@
+const path = require('path')
 /** @type { import('@storybook/vue-webpack5').StorybookConfig } */
-const config = {
+module.exports = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
@@ -13,5 +14,13 @@ const config = {
   docs: {
     autodocs: "tag",
   },
-};
-export default config;
+  // エイリアス@追加
+  webpackFinal: async (config) => {
+    // ...
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname, '../src'),
+    };
+    return config;
+  },
+}
