@@ -1,5 +1,13 @@
 <template>
-  <img :width="width" :src="markSrt(mark)" />
+  <v-card class="edge">
+    <v-img
+      min-width="100px"
+      :aspect-ratio="10000 / 14157"
+      :width="width"
+      :src="markSrt(mark)"
+      @click="onClick"
+    />
+  </v-card>
 </template>
 
 <script>
@@ -9,7 +17,7 @@ import { marks } from "@/utils/mark/markUtil";
 export default {
   props: {
     width: {
-      type: Number | String,
+      type: Number || String,
       default: "100px",
     },
     mark: {
@@ -21,9 +29,19 @@ export default {
     },
   },
   methods: {
+    onClick() {
+      this.$emit("onClick");
+    },
     markSrt(mark) {
       return defaultCards[mark];
     },
   },
 };
 </script>
+
+<style>
+.edge {
+  min-width: fit-content;
+  height: fit-content;
+}
+</style>

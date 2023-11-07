@@ -1,0 +1,35 @@
+<template>
+  <v-card class="edge" flat>
+    <v-img
+      min-width="100px"
+      :aspect-ratio="10000 / 14157"
+      :width="width"
+      :src="markSrt()"
+    />
+  </v-card>
+</template>
+
+<script>
+import defaultCards from "@/utils/cardsImg/default/settings.json";
+
+export default {
+  props: {
+    width: {
+      type: Number || String,
+      default: "100px",
+    },
+  },
+  methods: {
+    markSrt() {
+      return defaultCards["bk"];
+    },
+  },
+};
+</script>
+
+<style>
+.edge {
+  width: fit-content;
+  height: fit-content;
+}
+</style>

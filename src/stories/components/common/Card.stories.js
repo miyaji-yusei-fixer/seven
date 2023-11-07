@@ -1,9 +1,9 @@
-import Card from '@/components/Card.vue';
+import Card from '@/components/common/Card.vue';
 import marks from '@/utils/mark/markUtil'
 
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 export default {
-    title: 'Example/Card',
+    title: 'Components/Common/Card',
     component: Card,
     tags: ['autodocs'],
     render: (args, { argTypes }) => ({

@@ -1,8 +1,8 @@
-import CardBack from '@/components/CardBack.vue';
+import CardBack from '@/components/common/CardBack.vue';
 
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 export default {
-  title: 'Example/CardBack',
+  title: 'Components/Common/CardBack',
   component: CardBack,
   tags: ['autodocs'],
   render: (args, { argTypes }) => ({
