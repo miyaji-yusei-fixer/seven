@@ -3,7 +3,7 @@
     <v-row class="hands">
       <v-col cols="6" class="relative">
         <card-back />
-        <v-chip class="absolute">100</v-chip>
+        <v-chip class="absolute">{{ deckSheets }}</v-chip>
       </v-col>
       <v-col cols="6" class="relative">
         <card :mark="discard" />
@@ -18,7 +18,15 @@ import CardBack from "@/components/common/CardBack.vue";
 import { marks } from "@/utils/mark/markUtil";
 
 export default {
+  components: { Card, CardBack },
   props: {
+    deckSheets: {
+      type: Number,
+      required: true,
+      validator: function (value) {
+        return value <= 54;
+      },
+    },
     discard: {
       type: String,
       required: true,
@@ -27,7 +35,6 @@ export default {
       },
     },
   },
-  components: { Card, CardBack },
 };
 </script>
 

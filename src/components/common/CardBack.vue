@@ -16,7 +16,7 @@ export default {
   props: {
     width: {
       type: Number || String,
-      default: "100px",
+      default: 100,
     },
   },
   methods: {

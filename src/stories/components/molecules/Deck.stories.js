@@ -11,6 +11,7 @@ export default {
         template: '<deck v-bind="$props" />',
     }),
     argTypes: {
+        deckSheets: 30,
         discard: "s1"
     },
 };
@@ -18,6 +19,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/vue/writing-stories/args
 export const Default = {
     args: {
+        deckSheets: 30,
         discard: "s1"
     },
 };

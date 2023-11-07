@@ -13,6 +13,7 @@ export default {
     argTypes: {
         playerHands: ["s1", "hk", "c7", "dj", "j1"],
         hiddenHands: 5,
+        deckSheets: 30,
         discard: "s1"
     },
 };
@@ -22,6 +23,7 @@ export const Default = {
     args: {
         playerHands: ["s1", "hk", "c7", "dj", "j1"],
         hiddenHands: 5,
+        deckSheets: 30,
         discard: "s1"
     },
 };

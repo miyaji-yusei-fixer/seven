@@ -39,16 +39,15 @@ export default {
     },
     classes(index) {
       return {
-        "card": true,
+        card: true,
         "card-selected": this.isSelected(index),
       };
     },
     selectCard(index) {
-      if (this.isSelected(index)) {
-        this.selected = this.selected.filter((value) => value != index);
-      } else {
-        this.selected.push(index);
-      }
+      const matchNumber = this.hands.filter(
+        (hand) => hand.charAt(1) == this.hands[index].charAt(1)
+      );
+      this.selected = matchNumber.map((mark) => this.hands.indexOf(mark));
       console.log(this.selected);
     },
   },

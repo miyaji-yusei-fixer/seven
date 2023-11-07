@@ -15,10 +15,11 @@ import defaultCards from "@/utils/cardsImg/default/settings.json";
 import { marks } from "@/utils/mark/markUtil";
 
 export default {
+  name: "Card",
   props: {
     width: {
       type: Number || String,
-      default: "100px",
+      default: 100,
     },
     mark: {
       type: String,

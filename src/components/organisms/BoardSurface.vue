@@ -4,7 +4,7 @@
       <hands-hidden class="hands-hidden" :hands="hiddenHands" />
     </v-row>
     <v-row>
-      <deck :discard="discard" />
+      <deck :deckSheets="deckSheets" :discard="discard" />
     </v-row>
     <v-row>
       <hands-showed :hands="playerHands" />
@@ -19,6 +19,7 @@ import HandsHidden from "@/components/molecules/HandsHidden.vue";
 import { marks } from "@/utils/mark/markUtil";
 
 export default {
+  name: "BoardSurface",
   props: {
     playerHands: {
       type: Array,
@@ -30,6 +31,13 @@ export default {
     hiddenHands: {
       type: Number,
       required: true,
+    },
+    deckSheets: {
+      type: Number,
+      required: true,
+      validator: function (value) {
+        return value <= 54;
+      },
     },
     discard: {
       type: String,
