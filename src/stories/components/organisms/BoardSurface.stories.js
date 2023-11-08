@@ -11,7 +11,7 @@ export default {
         template: '<board-surface v-bind="$props" />',
     }),
     argTypes: {
-        playerHands: ["s1", "hk", "c7", "dj", "j1"],
+        playerHands: ["s1", "hk", "c7", "dj", "dq"],
         hiddenHands: 5,
         deckSheets: 30,
         discard: "s1"
@@ -21,7 +21,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/vue/writing-stories/args
 export const Default = {
     args: {
-        playerHands: ["s1", "hk", "c7", "dj", "j1"],
+        playerHands: ["s1", "hk", "c7", "dj", "dq"],
         hiddenHands: 5,
         deckSheets: 30,
         discard: "s1"

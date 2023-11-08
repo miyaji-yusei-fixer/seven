@@ -23,3 +23,11 @@ export const Default = {
         discard: "s1"
     },
 };
+
+export const IsDisabled = {
+    args: {
+        deckSheets: 30,
+        discard: "s1",
+        isDisabled: true
+    },
+};

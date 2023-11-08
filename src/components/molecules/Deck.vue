@@ -1,12 +1,12 @@
 <template>
-  <v-card flat class="field">
+  <v-card flat class="field" :disabled="isDisabled">
     <v-row class="hands">
       <v-col cols="6" class="relative">
-        <card-back />
-        <v-chip class="absolute">{{ deckSheets }}</v-chip>
+        <card-back  @onClick="onClickDeck"/>
+        <v-chip class="absolute" >{{ deckSheets }}</v-chip>
       </v-col>
       <v-col cols="6" class="relative">
-        <card :mark="discard" />
+        <card :mark="discard" @onClick="onClickDiscard" />
       </v-col>
     </v-row>
   </v-card>
@@ -24,7 +24,7 @@ export default {
       type: Number,
       required: true,
       validator: function (value) {
-        return value <= 54;
+        return value <= 52;
       },
     },
     discard: {
@@ -33,6 +33,18 @@ export default {
       validator: function (value) {
         return marks.indexOf(value) !== -1;
       },
+    },
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  methods: {
+    onClickDeck() {
+      this.$emit("onClickDeck");
+    },
+    onClickDiscard() {
+      this.$emit("onClickDiscard");
     },
   },
 };

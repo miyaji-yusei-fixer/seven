@@ -11,7 +11,7 @@ export default {
         template: '<hands-showed v-bind="$props" />',
     }),
     argTypes: {
-        hands: ["s1", "hk", "c7", "dj", "j1"],
+        hands: ["s1", "hk", "c7", "dj", "dq"],
         // selected: [2, 3]
     },
 };
@@ -19,7 +19,7 @@ export default {
 // More on writing stories with args: https://storybook.js.org/docs/vue/writing-stories/args
 export const Default = {
     args: {
-        hands: ["s1", "hk", "c7", "dj", "j1"],
+        hands: ["s1", "hk", "c7", "dj", "dq"],
         // selected: [2, 3]
     },
 };

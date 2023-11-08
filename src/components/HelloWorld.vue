@@ -1,17 +1,28 @@
 <template>
   <v-container>
-    <board-surface v-bind="props"></board-surface>
+    <hands-showed isDisabled :hands="enemyHands" />
+    <board-surface
+      ref="boardSurface"
+      v-bind="props"
+      @onClickDeck="onClickDeck"
+      @onClickDiscard="onClickDiscard"
+      @selectCard="selectCard"
+      :isDisabledDeck="isDisabledDeck"
+      :isDisabledHands="turn != 'player'"
+    ></board-surface>
   </v-container>
 </template>
 
 <script>
 import BoardSurface from "@/components/organisms/BoardSurface.vue";
 import { Game } from "@/script/game";
+import HandsShowed from "./molecules/HandsShowed.vue";
 export default {
-  components: { BoardSurface },
+  components: { BoardSurface, HandsShowed },
   name: "HelloWorld",
   data: () => ({
     game: new Game(),
+    selectedCard: [],
   }),
   computed: {
     props() {
@@ -19,14 +30,34 @@ export default {
         playerHands: this.game.playerHands,
         hiddenHands: this.game.enemyHands.length,
         deckSheets: this.game.deck.length,
-        discard: this.game.discard,
+        discard: this.game.discard[0],
       };
     },
+    turn() {
+      return this.game.turn;
+    },
+    // 後で消す
+    enemyHands() {
+      return this.game.enemyHands;
+    },
+    isDisabledDeck() {
+      return !(this.selectedCard.length && this.game.turn == "player");
+    },
   },
-  created() {
-    // console.log(this.game.deck);
-    // console.log(this.game.enemyHands);
-    // console.log(this.game.playerHands);
+  methods: {
+    onClickDeck() {
+      this.game.throwAndDrawDeck(this.selectedCard);
+      this.selectedCard = [];
+      this.$refs.boardSurface.resetSelect();
+    },
+    onClickDiscard() {
+      this.game.throwAndDrawDiscard(this.selectedCard);
+      this.selectedCard = [];
+      this.$refs.boardSurface.resetSelect();
+    },
+    selectCard(selectedCard) {
+      this.selectedCard = selectedCard;
+    },
   },
 };
 </script>

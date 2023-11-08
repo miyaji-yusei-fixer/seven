@@ -1,15 +1,26 @@
 <template>
-  <dev>
+  <div>
     <v-row>
       <hands-hidden class="hands-hidden" :hands="hiddenHands" />
     </v-row>
     <v-row>
-      <deck :deckSheets="deckSheets" :discard="discard" />
+      <deck
+        :deckSheets="deckSheets"
+        :discard="discard"
+        :isDisabled="isDisabledDeck"
+        @onClickDeck="onClickDeck"
+        @onClickDiscard="onClickDiscard"
+      />
     </v-row>
     <v-row>
-      <hands-showed :hands="playerHands" />
+      <hands-showed
+        ref="handsShowed"
+        :isDisabled="isDisabledHands"
+        :hands="playerHands"
+        @selectCard="selectCard"
+      />
     </v-row>
-  </dev>
+  </div>
 </template>
 
 <script>
@@ -20,6 +31,7 @@ import { marks } from "@/utils/mark/markUtil";
 
 export default {
   name: "BoardSurface",
+  components: { Deck, HandsShowed, HandsHidden },
   props: {
     playerHands: {
       type: Array,
@@ -36,7 +48,7 @@ export default {
       type: Number,
       required: true,
       validator: function (value) {
-        return value <= 54;
+        return value <= 52;
       },
     },
     discard: {
@@ -46,8 +58,29 @@ export default {
         return marks.indexOf(value) !== -1;
       },
     },
+    isDisabledDeck: {
+      type: Boolean,
+      default: false,
+    },
+    isDisabledHands: {
+      type: Boolean,
+      default: false,
+    },
   },
-  components: { Deck, HandsShowed, HandsHidden },
+  methods: {
+    onClickDeck() {
+      this.$emit("onClickDeck");
+    },
+    onClickDiscard() {
+      this.$emit("onClickDiscard");
+    },
+    selectCard(selecedtCard) {
+      this.$emit("selectCard", selecedtCard);
+    },
+    resetSelect() {
+      this.$refs.handsShowed.resetSelect();
+    },
+  },
 };
 </script>
 

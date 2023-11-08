@@ -1,5 +1,5 @@
 <template>
-  <v-card class="field">
+  <v-card class="field" :disabled="isDisabled">
     <v-row class="hands">
       <v-col
         cols="1"
@@ -7,7 +7,11 @@
         :key="`${mark}`"
         :class="classes(i)"
       >
-        <card :mark="mark" @onClick="selectCard(i)" />
+        <card
+          :mark="mark"
+          @onClick="selectCard(i)"
+          @resetSelect="resetSelect"
+        />
       </v-col>
     </v-row>
   </v-card>
@@ -25,6 +29,10 @@ export default {
     };
   },
   props: {
+    isDisabled: {
+      type: Boolean,
+      default: false,
+    },
     hands: {
       type: Array,
       required: true,
@@ -44,11 +52,19 @@ export default {
       };
     },
     selectCard(index) {
-      const matchNumber = this.hands.filter(
-        (hand) => hand.charAt(1) == this.hands[index].charAt(1)
-      );
-      this.selected = matchNumber.map((mark) => this.hands.indexOf(mark));
-      console.log(this.selected);
+      if (this.selected.includes(index)) {
+        this.resetSelect();
+        this.$emit("selectCard", this.selected);
+      } else {
+        const matchNumber = this.hands.filter(
+          (hand) => hand.charAt(1) == this.hands[index].charAt(1)
+        );
+        this.selected = matchNumber.map((mark) => this.hands.indexOf(mark));
+        this.$emit("selectCard", matchNumber);
+      }
+    },
+    resetSelect() {
+      this.selected = [];
     },
   },
 };

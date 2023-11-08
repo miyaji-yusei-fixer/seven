@@ -5,6 +5,7 @@
       :aspect-ratio="10000 / 14157"
       :width="width"
       :src="markSrt()"
+      @click="onClick"
     />
   </v-card>
 </template>
@@ -20,6 +21,9 @@ export default {
     },
   },
   methods: {
+    onClick() {
+      this.$emit("onClick");
+    },
     markSrt() {
       return defaultCards["bk"];
     },
