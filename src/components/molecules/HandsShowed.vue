@@ -1,5 +1,5 @@
 <template>
-  <v-card class="field" :disabled="isDisabled">
+  <v-card flat class="field" :disabled="isDisabled" color="rgba(0,0,0,0)">
     <v-row class="hands">
       <v-col
         cols="1"

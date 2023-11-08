@@ -1,12 +1,46 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <header>
+      <v-app-bar dark>
+        <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+        <v-toolbar-title>Seven</v-toolbar-title>
+      </v-app-bar>
+      <v-navigation-drawer v-model="drawer" fixed temporary>
+        <v-list nav dense>
+          <v-list-item-group>
+            <v-list-item @click="toNewGame('/seven')">
+              <v-list-item-title>ニューゲーム</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="toNewGame('/seven/about')">
+              <v-list-item-title>遊び方</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
+    </header>
+    <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      drawer: false,
+    };
+  },
+  methods: {
+    toNewGame(path) {
+      console.log(path, this.$route.path);
+      if (this.$route.path == path) {
+        location.reload();
+      } else {
+        this.$router.push(path);
+      }
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #app {

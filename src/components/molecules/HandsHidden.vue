@@ -1,5 +1,5 @@
 <template>
-  <v-card class="field">
+  <v-card flat class="field" color="rgba(0,0,0,0)">
     <v-row>
       <v-col class="card" cols="1" v-for="card in hands" :key="`${card}`">
         <card-back />
@@ -26,7 +26,7 @@ export default {
   padding: 0;
 }
 .field {
-  padding: 12px 0;
+  padding: 12px;
 }
 .hands {
   padding: 0 12px;

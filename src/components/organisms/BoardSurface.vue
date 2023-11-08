@@ -1,9 +1,14 @@
 <template>
-  <div>
+  <div style="padding: 24px; background-color: #4caf50">
     <v-row>
-      <hands-hidden class="hands-hidden" :hands="hiddenHands" />
+      <hands-hidden
+        v-if="!Array.isArray(this.hiddenHands)"
+        class="hands-hidden"
+        :hands="hiddenHands"
+      />
+      <hands-showed v-else class="hands-hidden" :hands="hiddenHands" />
     </v-row>
-    <v-row>
+    <v-row class="deck">
       <deck
         :deckSheets="deckSheets"
         :discard="discard"
@@ -41,7 +46,7 @@ export default {
       },
     },
     hiddenHands: {
-      type: Number,
+      type: Number || Array,
       required: true,
     },
     deckSheets: {
@@ -87,6 +92,9 @@ export default {
 <style>
 .card {
   padding: 0;
+}
+.deck {
+  margin: 24px 0;
 }
 .hands-hidden {
   transform: rotate(180deg);

@@ -1,6 +1,5 @@
 <template>
-  <v-container>
-    <hands-showed isDisabled :hands="enemyHands" />
+  <v-container class="background">
     <board-surface
       ref="boardSurface"
       v-bind="props"
@@ -16,9 +15,8 @@
 <script>
 import BoardSurface from "@/components/organisms/BoardSurface.vue";
 import { Game } from "@/script/game";
-import HandsShowed from "./molecules/HandsShowed.vue";
 export default {
-  components: { BoardSurface, HandsShowed },
+  components: { BoardSurface },
   name: "HelloWorld",
   data: () => ({
     game: new Game(),
@@ -28,17 +26,16 @@ export default {
     props() {
       return {
         playerHands: this.game.playerHands,
-        hiddenHands: this.game.enemyHands.length,
+        hiddenHands:
+          this.game.turn != "finished"
+            ? this.game.enemyHands.length
+            : this.game.enemyHands,
         deckSheets: this.game.deck.length,
         discard: this.game.discard[0],
       };
     },
     turn() {
       return this.game.turn;
-    },
-    // 後で消す
-    enemyHands() {
-      return this.game.enemyHands;
     },
     isDisabledDeck() {
       return !(this.selectedCard.length && this.game.turn == "player");
@@ -61,3 +58,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.background {
+  background-color: #4caf50;
+}
+</style>
