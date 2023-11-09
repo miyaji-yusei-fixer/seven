@@ -1,25 +1,28 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <header>
-      <v-app-bar dark>
+      <v-app-bar dark color="green darken-2">
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-toolbar-title>Seven</v-toolbar-title>
       </v-app-bar>
-      <v-navigation-drawer v-model="drawer" fixed temporary>
+      <v-navigation-drawer v-model="drawer" fixed temporary dark color="green darken-2">
         <v-list nav dense>
           <v-list-item-group>
-            <v-list-item @click="toNewGame('/seven')">
+            <v-list-item @click="toNewGame('/')">
               <v-list-item-title>ニューゲーム</v-list-item-title>
             </v-list-item>
-            <v-list-item @click="toNewGame('/seven/about')">
+            <v-list-item @click="toNewGame('/about')">
               <v-list-item-title>遊び方</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="toNewGame('/tutorial')">
+              <v-list-item-title>チュートリアル</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list>
       </v-navigation-drawer>
     </header>
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -31,7 +34,6 @@ export default {
   },
   methods: {
     toNewGame(path) {
-      console.log(path, this.$route.path);
       if (this.$route.path == path) {
         location.reload();
       } else {
@@ -49,18 +51,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>

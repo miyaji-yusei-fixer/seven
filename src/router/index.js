@@ -1,23 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import PlayGame from '@/views/HomeView.vue'
+import Tutorial from '@/views/TutorealView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/seven/',
+    path: '/',
     name: 'home',
-    component: HomeView
+    component: PlayGame
   },
   {
-    path: '/seven/about',
+    path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+  },
+  {
+    path: '/tutorial',
+    name: 'tutorial',
+    component: Tutorial
+  },
 ]
 
 const router = new VueRouter({
@@ -25,6 +28,7 @@ const router = new VueRouter({
   参考：https://code-schools.com/vue-router-sharp-remove/
   */
   mode: 'history',
+  base: process.env.NODE_ENV === 'production' ? '/seven/' : './',
   routes
 })
 

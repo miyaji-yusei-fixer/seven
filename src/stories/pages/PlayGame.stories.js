@@ -1,13 +1,13 @@
-import HelloWorld from '@/components/HelloWorld.vue';
+import PlayGame from '@/components/organisms/PlayGame.vue';
 
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 export default {
     title: 'Pages/PlayGame',
-    component: HelloWorld,
+    component: PlayGame,
     tags: ['autodocs'],
     render: () => ({
-        components: { HelloWorld },
-        template: '<HelloWorld v-bind="$props" />',
+        components: { PlayGame },
+        template: '<PlayGame v-bind="$props" />',
     }),
 };
 

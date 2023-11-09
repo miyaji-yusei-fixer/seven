@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 24px; background-color: #4caf50">
+  <div style="padding: 24px;" class="green">
     <v-row>
       <hands-hidden
         v-if="!Array.isArray(this.hiddenHands)"
@@ -46,7 +46,7 @@ export default {
       },
     },
     hiddenHands: {
-      type: Number || Array,
+      // type: Number || Array,
       required: true,
     },
     deckSheets: {

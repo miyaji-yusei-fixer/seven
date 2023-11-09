@@ -1,5 +1,5 @@
 <template>
-  <v-container class="background">
+  <v-container class="green">
     <board-surface
       ref="boardSurface"
       v-bind="props"
@@ -42,15 +42,21 @@ export default {
     },
   },
   methods: {
-    onClickDeck() {
-      this.game.throwAndDrawDeck(this.selectedCard);
+    async onClickDeck() {
+      const result = await this.game.throwAndDrawDeck(this.selectedCard);
       this.selectedCard = [];
       this.$refs.boardSurface.resetSelect();
+      if (typeof result == "string") {
+        setTimeout(() => alert(result), 1000)
+      }
     },
-    onClickDiscard() {
-      this.game.throwAndDrawDiscard(this.selectedCard);
+    async onClickDiscard() {
+      const result = await this.game.throwAndDrawDiscard(this.selectedCard);
       this.selectedCard = [];
       this.$refs.boardSurface.resetSelect();
+      if (typeof result == "string") {
+        setTimeout(() => alert(result), 1000)
+      }
     },
     selectCard(selectedCard) {
       this.selectedCard = selectedCard;
@@ -58,9 +64,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.background {
-  background-color: #4caf50;
-}
-</style>

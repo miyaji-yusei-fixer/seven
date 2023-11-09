@@ -25,7 +25,7 @@ export const Game = class {
         return cards.sort((a, b) => marksNumber.indexOf(a) - marksNumber.indexOf(b))
     }
     // 手札を捨ててデッキから引く
-    throwAndDrawDeck(throwCards) {
+    async throwAndDrawDeck(throwCards) {
         // 捨てる
         this.discard = throwCards.concat(this.discard)
         this.playerHands = this.playerHands.filter((card) => !throwCards.includes(card))
@@ -34,15 +34,16 @@ export const Game = class {
         // ソート
         this.playerHands = this.sortOfNumber(this.playerHands)
         if (this.checkResult(this.playerHands)) {
-            window.alert("あなたの勝ち！")
             this.turn = "finished"
+            return "あなたの勝ち！"
         } else {
             // 手番交代
-            this.enemyTurn()
+            const enemyTurn = await this.enemyTurn()
+            return enemyTurn
         }
     }
     // 手札を捨てて捨て札から引く
-    throwAndDrawDiscard(throwCards) {
+    async throwAndDrawDiscard(throwCards) {
         // 手札から抜く
         this.playerHands = this.playerHands.filter((card) => !throwCards.includes(card))
         // 手札に取り入れる
@@ -54,11 +55,12 @@ export const Game = class {
         // 捨て札に出す
         this.discard = throwCards.concat(this.discard)
         if (this.checkResult(this.playerHands)) {
-            window.alert("あなたの勝ち！")
             this.turn = "finished"
+            return "あなたの勝ち！"
         } else {
             // 手番交代
-            this.enemyTurn()
+            const enemyTurn = await this.enemyTurn()
+            return enemyTurn
         }
     }
     // 敵が手札を捨ててデッキから引く
@@ -103,8 +105,9 @@ export const Game = class {
         return sum <= 7
     }
     // 相手のターン：初級（一番でかい手札を捨て、捨て札が手札に含まれない限り山札から引く）
-    enemyTurn() {
+    async enemyTurn() {
         this.turn = "enemy"
+        await waitSecond(1)
         this.enemyHands = this.sortOfNumber(this.enemyHands)
         let selected = []
         numberSort.forEach(number => {
@@ -119,13 +122,11 @@ export const Game = class {
             this.enemyThrowAndDrawDeck(selected)
         }
         if (this.checkResult(this.enemyHands)) {
-            window.alert("相手の勝ち...")
             this.turn = "finished"
+            return "相手の勝ち..."
         } else {
             this.turn = "player"
         }
-
-
     }
     constructor() {
         this.deck = shuffle(marks)
@@ -155,3 +156,10 @@ const shuffle = (array) => {
     return array;
 }
 
+const waitSecond = (second) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(second);
+        }, second * 1000);
+    })
+}

@@ -38,7 +38,7 @@ export const Default = {
             "dj",
             "hk"
         ],
-        hiddenHands: 5,
+        hiddenHands: 7,
         deckSheets: 37,
         discard: "ck"
     },

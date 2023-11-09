@@ -3,7 +3,7 @@
     <v-row class="hands">
       <v-col cols="6" class="relative">
         <card-back  @onClick="onClickDeck"/>
-        <v-chip class="absolute" >{{ deckSheets }}</v-chip>
+        <v-chip @click="onClickDeck" class="absolute" >{{ deckSheets }}</v-chip>
       </v-col>
       <v-col cols="6" class="relative">
         <card :mark="discard" @onClick="onClickDiscard" />
