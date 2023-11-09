@@ -8,13 +8,13 @@
       <v-navigation-drawer v-model="drawer" fixed temporary dark color="green darken-2">
         <v-list nav dense>
           <v-list-item-group>
-            <v-list-item @click="toNewGame('/')">
+            <v-list-item @click="toNewGame('/seven')">
               <v-list-item-title>ニューゲーム</v-list-item-title>
             </v-list-item>
-            <v-list-item @click="toNewGame('/about')">
+            <v-list-item @click="toNewGame('/seven/about')">
               <v-list-item-title>遊び方</v-list-item-title>
             </v-list-item>
-            <v-list-item @click="toNewGame('/tutorial')">
+            <v-list-item @click="toNewGame('/seven/tutorial')">
               <v-list-item-title>チュートリアル</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
