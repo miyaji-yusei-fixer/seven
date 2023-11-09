@@ -1,12 +1,17 @@
 <template>
-  <div style="padding: 24px;" class="green">
+  <div style="padding: 24px" class="green">
     <v-row>
       <hands-hidden
         v-if="!Array.isArray(this.hiddenHands)"
         class="hands-hidden"
         :hands="hiddenHands"
       />
-      <hands-showed v-else class="hands-hidden" :hands="hiddenHands" />
+      <hands-showed
+        v-else
+        :isDisabled="true"
+        class="hands-hidden"
+        :hands="hiddenHands"
+      />
     </v-row>
     <v-row class="deck">
       <deck
