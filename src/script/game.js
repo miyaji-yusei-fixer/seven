@@ -34,7 +34,7 @@ export const Game = class {
         // ソート
         this.playerHands = this.sortOfNumber(this.playerHands)
         if (this.checkResult(this.playerHands)) {
-            this.turn = "finished"
+            this.phase = "finished"
             return "あなたの勝ち！"
         } else {
             // 手番交代
@@ -55,7 +55,7 @@ export const Game = class {
         // 捨て札に出す
         this.discard = throwCards.concat(this.discard)
         if (this.checkResult(this.playerHands)) {
-            this.turn = "finished"
+            this.phase = "finished"
             return "あなたの勝ち！"
         } else {
             // 手番交代
@@ -106,7 +106,7 @@ export const Game = class {
     }
     // 相手のターン：初級（一番でかい手札を捨て、捨て札が手札に含まれない限り山札から引く）
     async enemyTurn() {
-        this.turn = "enemy"
+        this.phase = "enemy"
         await waitSecond(1)
         this.enemyHands = this.sortOfNumber(this.enemyHands)
         let selected = []
@@ -116,29 +116,43 @@ export const Game = class {
                 return
             }
         })
+        this.enemySelect = selected.map(mark => this.enemyHands.indexOf(mark))
+        await waitSecond(1)
         if (this.enemyHands.some(mark => mark.includes(this.discard[0][1]))) {
             this.enemyThrowAndDrawDiscard(selected)
         } else {
             this.enemyThrowAndDrawDeck(selected)
         }
+        this.enemySelect = []
         if (this.checkResult(this.enemyHands)) {
-            this.turn = "finished"
+            this.phase = "finished"
             return "相手の勝ち..."
         } else {
-            this.turn = "player"
+            this.turn += 1
+            this.phase = "player"
         }
     }
     constructor() {
         this.deck = shuffle(marks)
+        this.deck = marks
         this.playerHands = this.sortOfNumber(this.drawDeck(7))
         this.enemyHands = this.drawDeck(7)
+        this.enemySelect = []
         this.discard = this.drawDeck(1)
+        // 初期捨て札がジョーカーのとき引き直し
+        while ((this.discard[0] == "ji" || this.discard[0] == "jt")) {
+            this.deck.push(this.discard[0])
+            this.deck = shuffle(this.deck)
+            this.discard = this.drawDeck(1)
+        }
+        this.turn = 1
         /*
-        ターン
-        プレーヤーのターン："player"
-        相手のターン："enemy"
+        フェーズ
+        プレーヤーのフェーズ："player"
+        相手のフェーズ："enemy"
+        ゲーム終了: "finished"
         */
-        this.turn = "player"
+        this.phase = "player"
     }
 }
 

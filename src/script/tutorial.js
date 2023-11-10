@@ -11,7 +11,6 @@ export const Tutorial = class {
     }
     nextStep() {
         this.phase += 1
-        console.log(this.phase)
         // phase1
         switch (this.phase) {
             case 1:

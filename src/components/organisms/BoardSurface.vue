@@ -1,10 +1,11 @@
 <template>
-  <div style="padding: 24px" class="green">
+  <v-container class="green board-surface">
     <v-row>
       <hands-hidden
         v-if="!Array.isArray(this.hiddenHands)"
         class="hands-hidden"
         :hands="hiddenHands"
+        :selected="hiddenSelected"
       />
       <hands-showed
         v-else
@@ -22,6 +23,7 @@
         @onClickDiscard="onClickDiscard"
       />
     </v-row>
+    <v-spacer></v-spacer>
     <v-row>
       <hands-showed
         ref="handsShowed"
@@ -30,7 +32,7 @@
         @selectCard="selectCard"
       />
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -53,6 +55,10 @@ export default {
     hiddenHands: {
       // type: Number || Array,
       required: true,
+    },
+    hiddenSelected: {
+      type: Array,
+      default: () => [],
     },
     deckSheets: {
       type: Number,
@@ -95,6 +101,9 @@ export default {
 </script>
 
 <style>
+.board-surface {
+  padding: 24px;
+}
 .card {
   padding: 0;
 }

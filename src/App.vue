@@ -4,6 +4,7 @@
       <v-app-bar dark color="green darken-2">
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
         <v-toolbar-title>Seven</v-toolbar-title>
+        <v-spacer></v-spacer>
       </v-app-bar>
       <v-navigation-drawer
         v-model="drawer"

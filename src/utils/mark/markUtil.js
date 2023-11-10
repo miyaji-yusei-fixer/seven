@@ -51,6 +51,8 @@ export const marks = [
     "dj",
     "dq",
     "dk",
+    "ji",
+    "jt"
 ];
 
 export const marksNumber = [
@@ -106,6 +108,8 @@ export const marksNumber = [
     "hk",
     "ck",
     "dk",
+    "ji",
+    "jt"
 ];
 
 export const numberSort =  [

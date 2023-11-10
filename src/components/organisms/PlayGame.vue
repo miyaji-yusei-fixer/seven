@@ -1,5 +1,25 @@
 <template>
-  <v-container class="green">
+  <v-container class="play-game green" fluid>
+    <v-app-bar dark color="green lighten-1">
+      <v-toolbar-title>{{
+        phase == "finished" ? "Finished" : `Turn: ${turn}`
+      }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-title>{{
+        phase == "finished" ? "" : `${phase} Phase`
+      }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-title>{{
+        phase == "finished"
+          ? ""
+          : `${game.playerHands.length}：${game.enemyHands.length}`
+      }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn @click="newGame" icon>
+        <v-icon>mdi-refresh</v-icon>
+      </v-btn>
+    </v-app-bar>
+
     <board-surface
       ref="boardSurface"
       v-bind="props"
@@ -7,8 +27,8 @@
       @onClickDiscard="onClickDiscard"
       @selectCard="selectCard"
       :isDisabledDeck="isDisabledDeck"
-      :isDisabledHands="turn != 'player'"
-    ></board-surface>
+      :isDisabledHands="phase != 'player'"
+    />
   </v-container>
 </template>
 
@@ -27,9 +47,10 @@ export default {
       return {
         playerHands: this.game.playerHands,
         hiddenHands:
-          this.game.turn != "finished"
+          this.game.phase != "finished"
             ? this.game.enemyHands.length
             : this.game.enemyHands,
+        hiddenSelected: this.game.enemySelect,
         deckSheets: this.game.deck.length,
         discard: this.game.discard[0],
       };
@@ -37,25 +58,31 @@ export default {
     turn() {
       return this.game.turn;
     },
+    phase() {
+      return this.game.phase;
+    },
     isDisabledDeck() {
-      return !(this.selectedCard.length && this.game.turn == "player");
+      return !(this.selectedCard.length && this.game.phase == "player");
     },
   },
   methods: {
+    newGame() {
+      this.game = new Game();
+    },
     async onClickDeck() {
+      this.$refs.boardSurface.resetSelect();
       const result = await this.game.throwAndDrawDeck(this.selectedCard);
       this.selectedCard = [];
-      this.$refs.boardSurface.resetSelect();
       if (typeof result == "string") {
-        setTimeout(() => alert(result), 1000)
+        setTimeout(() => alert(result), 1000);
       }
     },
     async onClickDiscard() {
+      this.$refs.boardSurface.resetSelect();
       const result = await this.game.throwAndDrawDiscard(this.selectedCard);
       this.selectedCard = [];
-      this.$refs.boardSurface.resetSelect();
       if (typeof result == "string") {
-        setTimeout(() => alert(result), 1000)
+        setTimeout(() => alert(result), 1000);
       }
     },
     selectCard(selectedCard) {
@@ -64,3 +91,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.play-game {
+  height: 100%;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="green">
+  <v-container class="play-game green" fluid>
     <board-surface
       ref="boardSurface"
       v-bind="props"
@@ -257,7 +257,7 @@ const tutorialText = [
     "山札から1枚引きましょう。\n手札が♠1, ♦4で合計が5なので、2以下のカードを引ければ勝ちです。",
   ],
   [
-    "手札が♠1, ♦4で合計が8なので、7以下になりませんでした。相手のターンになります。",
+    "手札が♠1, ♦3, ♦4で合計が8なので、7以下になりませんでした。相手のターンになります。",
   ],
   [
     `相手は♠2, ♥2を捨て、山札から1枚引いたようです。
@@ -270,3 +270,9 @@ const tutorialText = [
   ],
 ];
 </script>
+
+<style>
+.play-game {
+  height: 100%;
+}
+</style>
