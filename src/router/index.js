@@ -7,17 +7,17 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/seven/',
+    path: '/',
     name: 'home',
     component: PlayGame
   },
   {
-    path: '/seven/about',
+    path: '/about',
     name: 'about',
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/seven/tutorial',
+    path: '/tutorial',
     name: 'tutorial',
     component: Tutorial
   },
@@ -28,7 +28,7 @@ const router = new VueRouter({
   参考：https://code-schools.com/vue-router-sharp-remove/
   */
   mode: 'history',
-  // base: process.env.NODE_ENV === 'production' ? '/seven/' : './',
+  base: process.env.NODE_ENV === 'production' ? '/seven/' : './',
   routes
 })
 
