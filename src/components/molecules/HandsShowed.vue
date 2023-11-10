@@ -70,12 +70,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .card {
   padding: 0;
 }
 .card-selected {
   transform: translateY(-24px);
+  // ヌルっと動かせるけどカード移動のアニメーションが実装だるいから入れない
+  // transition: 0.1s all ease-out;
 }
 .field {
   padding-bottom: 12px;

@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .edge {
   min-width: fit-content;
   height: fit-content;

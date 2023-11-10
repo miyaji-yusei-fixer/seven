@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .card {
   padding: 0;
 }

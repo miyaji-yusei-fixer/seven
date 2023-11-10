@@ -271,7 +271,7 @@ const tutorialText = [
 ];
 </script>
 
-<style>
+<style lang="scss">
 .play-game {
   height: 100%;
 }

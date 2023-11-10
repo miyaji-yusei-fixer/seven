@@ -100,7 +100,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .board-surface {
   padding: 24px;
 }

@@ -48,7 +48,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .v-sheet h2 {
   text-align: left;
 }

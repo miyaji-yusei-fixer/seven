@@ -50,7 +50,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .relative {
   text-align: -webkit-center;
   height: fit-content;

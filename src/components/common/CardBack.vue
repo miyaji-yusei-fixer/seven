@@ -31,7 +31,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .edge {
   width: fit-content;
   height: fit-content;
