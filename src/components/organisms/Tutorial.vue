@@ -39,17 +39,7 @@
           初めから　やり直す
         </v-btn>
         <!-- いつかコンポーネント化する -->
-        <v-container d-flex justify-center v-if="pageLength > 1">
-          <div v-for="i in pageLength" v-bind:key="i">
-            <v-icon class="ma-2" color="green" size="small" @click="page = i">
-              {{
-                i == page
-                  ? "mdi-checkbox-blank-circle"
-                  : "mdi-checkbox-blank-circle-outline"
-              }}
-            </v-icon>
-          </div>
-        </v-container>
+        <PaginationTutorial v-model="page"  :pageLength="pageLength" />
         <v-card-actions>
           <v-btn v-if="page > 1" dark color="green" @click="page += -1">
             戻る
@@ -72,9 +62,10 @@
 
 <script>
 import BoardSurface from "@/components/organisms/BoardSurface.vue";
+import PaginationTutorial from "@/components/common/PaginationTutorial.vue";
 import { Tutorial } from "@/script/tutorial";
 export default {
-  components: { BoardSurface },
+  components: { BoardSurface, PaginationTutorial },
   name: "Tutorial",
   data: () => ({
     tutorial: new Tutorial(),
