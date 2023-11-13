@@ -7,7 +7,7 @@
         :key="`${card}`"
         :class="classes(i)"
       >
-        <card-back />
+        <CardBack />
       </v-col>
     </v-row>
   </v-card>

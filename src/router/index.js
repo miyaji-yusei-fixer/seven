@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import PlayGame from '@/views/HomeView.vue'
-import Tutorial from '@/views/TutorealView.vue'
+import PlayGame from '@/pages/PlayGame.vue'
+import Tutorial from '@/pages/Tutorial.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +14,8 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    // こういう書き方もあるって意味で書き方を揃えてないよ
+    component: () => import(/* webpackChunkName: "about" */ './AboutView.vue')
   },
   {
     path: '/tutorial',

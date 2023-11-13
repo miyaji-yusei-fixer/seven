@@ -20,7 +20,7 @@
       </v-btn>
     </v-app-bar>
 
-    <board-surface
+    <BoardSurface
       ref="boardSurface"
       v-bind="props"
       @onClickDeck="onClickDeck"

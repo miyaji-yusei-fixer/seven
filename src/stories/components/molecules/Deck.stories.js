@@ -8,7 +8,7 @@ export default {
     render: (args, { argTypes }) => ({
         props: Object.keys(argTypes),
         components: { Deck },
-        template: '<deck v-bind="$props" />',
+        template: '<Deck v-bind="$props" />',
     }),
     argTypes: {
         deckSheets: 30,

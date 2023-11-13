@@ -1,13 +1,13 @@
 <template>
   <v-container class="green board-surface">
     <v-row>
-      <hands-hidden
+      <HandsHidden
         v-if="!Array.isArray(this.hiddenHands)"
         class="hands-hidden"
         :hands="hiddenHands"
         :selected="hiddenSelected"
       />
-      <hands-showed
+      <HandsShowed
         v-else
         :isDisabled="true"
         class="hands-hidden"
@@ -15,7 +15,7 @@
       />
     </v-row>
     <v-row class="deck">
-      <deck
+      <Deck
         :deckSheets="deckSheets"
         :discard="discard"
         :isDisabled="isDisabledDeck"
@@ -25,7 +25,7 @@
     </v-row>
     <v-spacer></v-spacer>
     <v-row>
-      <hands-showed
+      <HandsShowed
         ref="handsShowed"
         :isDisabled="isDisabledHands"
         :hands="playerHands"

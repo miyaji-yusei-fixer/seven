@@ -8,7 +8,7 @@ export default {
     render: (args, { argTypes }) => ({
         props: Object.keys(argTypes),
         components: { BoardSurface },
-        template: '<board-surface v-bind="$props" />',
+        template: '<BoardSurface v-bind="$props" />',
     }),
     argTypes: {
         playerHands: [

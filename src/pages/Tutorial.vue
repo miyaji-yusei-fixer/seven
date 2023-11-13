@@ -1,7 +1,7 @@
 <!-- eslint-disable no-irregular-whitespace -->
 <template>
   <v-container class="play-game green" fluid>
-    <board-surface
+    <BoardSurface
       ref="boardSurface"
       v-bind="props"
       @onClickDeck="onClickDeck"

@@ -8,7 +8,7 @@ export default {
   render: (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     components: { CardBack },
-    template: '<card-back v-bind="$props" />',
+    template: '<CardBack v-bind="$props" />',
   }),
   argTypes: {
     width: {

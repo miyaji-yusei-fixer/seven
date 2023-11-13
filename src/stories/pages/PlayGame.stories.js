@@ -1,4 +1,4 @@
-import PlayGame from '@/components/organisms/PlayGame.vue';
+import PlayGame from '@/pages/PlayGame.vue';
 
 // More on how to set up stories at: https://storybook.js.org/docs/vue/writing-stories/introduction
 export default {

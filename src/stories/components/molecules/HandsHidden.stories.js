@@ -8,7 +8,7 @@ export default {
     render: (args, { argTypes }) => ({
         props: Object.keys(argTypes),
         components: { HandsHidden },
-        template: '<hands-hidden v-bind="$props" />',
+        template: '<HandsHidden v-bind="$props" />',
     }),
     argTypes: {
         hands: 5

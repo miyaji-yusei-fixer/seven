@@ -9,7 +9,7 @@ export default {
     render: (args, { argTypes }) => ({
         props: Object.keys(argTypes),
         components: { Card },
-        template: '<card v-bind="$props" />',
+        template: '<Card v-bind="$props" />',
     }),
     argTypes: {
         mark: {
