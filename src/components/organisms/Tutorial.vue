@@ -1,3 +1,4 @@
+<!-- eslint-disable no-irregular-whitespace -->
 <template>
   <v-container class="play-game green" fluid>
     <board-surface
@@ -21,13 +22,29 @@
           >{{ tutorialText[phase][page - 1] }}</v-card-text
         >
         <v-spacer></v-spacer>
+        <v-btn
+          v-if="phase == tutorialText.length - 1"
+          dark
+          color="green"
+          @click="$router.push('/')"
+        >
+          ゲームをプレイする
+        </v-btn>
+        <v-btn
+          v-if="phase == tutorialText.length - 1"
+          dark
+          color="red"
+          @click="resetTutorial"
+        >
+          初めから　やり直す
+        </v-btn>
         <v-pagination
           v-if="pageLength > 1"
           color="green"
           v-model="page"
           :length="pageLength"
           circle
-        ></v-pagination>
+        />
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -53,7 +70,6 @@ export default {
   data: () => ({
     tutorial: new Tutorial(),
     dialog: true,
-    section: 1,
     page: 1,
     tutorialText,
   }),
@@ -107,6 +123,11 @@ export default {
           }, 1000);
         }, 1000);
       }
+    },
+    resetTutorial() {
+      this.tutorial = new Tutorial();
+      this.dialog = true;
+      this.page = 1;
     },
     nextStep() {
       this.tutorial.nextStep();
@@ -266,7 +287,7 @@ const tutorialText = [
   ],
   [
     `手札が♠1, ♦3, ♠2で合計が7以下になりました！あなたの勝利です！
-ルールがわかったら、せひ左上のメニューからニューゲームを選択して遊んでみてください！`,
+ルールがわかったら、さっそくゲームをプレイしてみましょう！`,
   ],
 ];
 </script>
@@ -274,5 +295,8 @@ const tutorialText = [
 <style lang="scss">
 .play-game {
   height: 100%;
+}
+.v-btn + .v-btn {
+  margin: 12px;
 }
 </style>
