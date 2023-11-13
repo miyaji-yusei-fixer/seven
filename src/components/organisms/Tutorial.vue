@@ -38,23 +38,32 @@
         >
           初めから　やり直す
         </v-btn>
-        <v-pagination
-          v-if="pageLength > 1"
-          color="green"
-          v-model="page"
-          :length="pageLength"
-          circle
-        />
+        <!-- いつかコンポーネント化する -->
+        <v-container d-flex justify-center v-if="pageLength > 1">
+          <div v-for="i in pageLength" v-bind:key="i">
+            <v-icon class="ma-2" color="green" size="small" @click="page = i">
+              {{
+                i == page
+                  ? "mdi-checkbox-blank-circle"
+                  : "mdi-checkbox-blank-circle-outline"
+              }}
+            </v-icon>
+          </div>
+        </v-container>
         <v-card-actions>
+          <v-btn v-if="page > 1" dark color="green" @click="page += -1">
+            戻る
+          </v-btn>
           <v-spacer></v-spacer>
           <v-btn
+            v-if="page != pageLength"
             dark
             color="green"
-            :disabled="pageLength != page"
-            @click="cloaseDialog"
+            @click="page += 1"
           >
-            閉じる
+            次へ
           </v-btn>
+          <v-btn v-else dark color="red" @click="cloaseDialog"> 閉じる </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -297,6 +306,9 @@ const tutorialText = [
   height: 100%;
 }
 .v-btn + .v-btn {
+  margin: 12px;
+}
+.pagenation-button {
   margin: 12px;
 }
 </style>
