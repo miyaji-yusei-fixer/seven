@@ -15,7 +15,7 @@ const routes = [
     path: '/about',
     name: 'about',
     // こういう書き方もあるって意味で書き方を揃えてないよ
-    component: () => import(/* webpackChunkName: "about" */ './AboutView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/pages/AboutView.vue')
   },
   {
     path: '/tutorial',
