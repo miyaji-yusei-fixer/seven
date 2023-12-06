@@ -125,5 +125,7 @@ export const numberSort =  [
     "x",
     "j",
     "q",
-    "k"
+    "k",
+    "i",
+    "t"
 ]

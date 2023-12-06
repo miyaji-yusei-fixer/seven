@@ -50,6 +50,8 @@ export default {
           this.game.phase != "finished"
             ? this.game.enemyHands.length
             : this.game.enemyHands,
+        // デバッグ：相手の手札を表示する時
+        // hiddenHands: this.game.enemyHands,
         hiddenSelected: this.game.enemySelect,
         deckSheets: this.game.deck.length,
         discard: this.game.discard[0],
