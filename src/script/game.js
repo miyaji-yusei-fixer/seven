@@ -38,7 +38,7 @@ export const Game = class {
             return "あなたの勝ち！"
         } else {
             // 手番交代
-            const enemyTurn = await this.enemyTurn()
+            const enemyTurn = await this.enemyTurn(this.level)
             return enemyTurn
         }
     }
@@ -59,7 +59,7 @@ export const Game = class {
             return "あなたの勝ち！"
         } else {
             // 手番交代
-            const enemyTurn = await this.enemyTurn()
+            const enemyTurn = await this.enemyTurn(this.level)
             return enemyTurn
         }
     }
@@ -104,18 +104,44 @@ export const Game = class {
         })
         return sum <= 7
     }
-    // 相手のターン：初級（一番でかい手札を捨て、捨て札が手札に含まれない限り山札から引く）
-    async enemyTurn() {
+    // 相手のターン
+    async enemyTurn(level) {
         this.phase = "enemy"
         await waitSecond(1)
         this.enemyHands = this.sortOfNumber(this.enemyHands)
         let selected = []
-        numberSort.forEach(number => {
-            if (this.enemyHands.some(mark => mark.includes(number))) {
-                selected = this.enemyHands.filter(mark => mark.includes(number))
-                return
-            }
-        })
+        switch (level) {
+            // 中級（一番でかい手札を捨て、捨て札が手札に含まれない限り山札から引く）
+            // 手札の最大の数字と数字が捨て札と一致していた時、その札は捨てない
+            // ジョーカーを優先的に捨てる
+            case "2":
+                console.log(numberSort
+                    .filter(mark => !mark.includes(this.discard[0][1])))
+                numberSort
+                    .filter(mark => !mark.includes(this.discard[0][1]))
+                    .forEach(number => {
+                        if (this.enemyHands.some(mark => mark.includes(number))) {
+                            selected = this.enemyHands.filter(mark => mark.includes(number))
+                            return
+                        }
+                    })
+
+                break;
+
+            // 初級（一番でかい手札を捨て、捨て札が手札に含まれない限り山札から引く）
+            // 手札の最大の数字と数字が捨て札と一致していた時、2ターン同じ数字を捨て続ける
+            // ジョーカーを優先的に捨てる
+            default:
+                numberSort.forEach(number => {
+                    if (this.enemyHands.some(mark => mark.includes(number))) {
+                        selected = this.enemyHands.filter(mark => mark.includes(number))
+                        return
+                    }
+                })
+
+                break;
+        }
+
         this.enemySelect = selected.map(mark => this.enemyHands.indexOf(mark))
         await waitSecond(1)
         if (this.enemyHands.some(mark => mark.includes(this.discard[0][1]))) {
@@ -133,6 +159,8 @@ export const Game = class {
         }
     }
     constructor() {
+        const levelList = ["1", "2"]
+        this.level = levelList[Math.floor(Math.random() * levelList.length)];
         this.deck = shuffle(marks)
         this.deck = marks
         this.playerHands = this.sortOfNumber(this.drawDeck(7))
