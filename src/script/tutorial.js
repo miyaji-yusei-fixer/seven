@@ -3,7 +3,7 @@ export const Tutorial = class {
     constructor() {
         this.deck = deck
         this.playerHands = ["s1", "h3", "c3", "d8", "dx", "hq", "ck"]
-        this.enemyHands = ["sx", "s3", "h7", "c7", "c8", "d9", "cq"]
+        this.enemyHands = ["ji", "s3", "h7", "c7", "c8", "d9", "cq"]
         this.discard = ["s4"]
         this.isDisabledDeck = true
         this.isDisabledHands = false
@@ -22,7 +22,7 @@ export const Tutorial = class {
                 this.playerHands = this.sortOfNumber(this.playerHands)
                 break;
             case 3:
-                this.enemyHands = ["sx", "s3", "h7", "c7", "c8", "d9"]
+                this.enemyHands = ["ji", "s3", "h7", "c7", "c8", "d9"]
                 this.drawADeck(this.enemyHands)
                 this.discard = ["cq"].concat(this.discard);
                 break;
@@ -109,7 +109,8 @@ const deck = [
     "d7",
     "dj",
     "dq",
-    "dk"
+    "dk",
+    "jt"
 ]
 
 const deck2 = [
