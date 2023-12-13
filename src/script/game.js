@@ -158,9 +158,9 @@ export const Game = class {
             this.phase = "player"
         }
     }
-    constructor() {
+    constructor(level) {
         const levelList = ["1", "2"]
-        this.level = levelList[Math.floor(Math.random() * levelList.length)];
+        this.level = level || levelList[Math.floor(Math.random() * levelList.length)];
         this.deck = shuffle(marks)
         this.deck = marks
         this.playerHands = this.sortOfNumber(this.drawDeck(7))
