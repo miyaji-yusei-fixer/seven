@@ -15,7 +15,7 @@
           : `${game.playerHands.length}：${game.enemyHands.length}`
       }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn @click="newGame" icon>
+      <v-btn @click="newGameDialog = true" icon>
         <v-icon>mdi-refresh</v-icon>
       </v-btn>
     </v-app-bar>
@@ -29,6 +29,71 @@
       :isDisabledDeck="isDisabledDeck"
       :isDisabledHands="phase != 'player'"
     />
+    <v-dialog v-model="newGameDialog" max-width="500px">
+      <v-card color="blue-grey lighten-5">
+        <v-card-text>
+          <v-row class="pt-4">
+            <v-col>
+              <v-btn
+                class="new-game-button"
+                outlined
+                x-large
+                color="green"
+                @click="newGame(1)"
+              >
+                初級
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn
+                class="new-game-button"
+                outlined
+                x-large
+                color="amber"
+                @click="newGame(2)"
+              >
+                中級
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn
+                class="new-game-button"
+                outlined
+                x-large
+                color="orange"
+                @click="newGame()"
+              >
+                ランダム
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn
+                class="new-game-button"
+                outlined
+                @click="$router.push('/tutorial')"
+              >
+                チュートリアル
+              </v-btn>
+            </v-col>
+            <v-col>
+              <v-btn
+                class="new-game-button"
+                outlined
+                @click="$router.push('/about')"
+              >
+                遊び方
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -41,6 +106,7 @@ export default {
   data: () => ({
     game: new Game(),
     selectedCard: [],
+    newGameDialog: true,
   }),
   computed: {
     props() {
@@ -68,8 +134,9 @@ export default {
     },
   },
   methods: {
-    newGame() {
-      this.game = new Game();
+    newGame(level) {
+      this.game = new Game(level);
+      this.newGameDialog = false;
     },
     async onClickDeck() {
       this.$refs.boardSurface.resetSelect();
@@ -97,5 +164,9 @@ export default {
 <style lang="scss">
 .play-game {
   height: 100%;
+}
+.new-game-button {
+  width: 100%;
+  border-width: 2px;
 }
 </style>
