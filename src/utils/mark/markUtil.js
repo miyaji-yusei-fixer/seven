@@ -112,7 +112,7 @@ export const marksNumber = [
     "jt"
 ];
 
-export const numberSort =  [
+export const numberSort = [
     "1",
     "2",
     "3",
