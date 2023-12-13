@@ -26,6 +26,16 @@
             </v-list-item>
           </v-list-item-group>
         </v-list>
+        <template v-slot:append>
+          <p class="white--text">version: {{ version }}</p>
+          <p>
+            <a
+              class="white--text"
+              href="https://github.com/miyaji-yusei-fixer/seven"
+              >©2023 Miyaji Yusei
+            </a>
+          </p>
+        </template>
       </v-navigation-drawer>
     </header>
     <router-view />
@@ -33,10 +43,12 @@
 </template>
 
 <script>
+import settings from "../package.json";
 export default {
   data() {
     return {
       drawer: false,
+      version: settings.version,
     };
   },
   methods: {
