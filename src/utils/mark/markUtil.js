@@ -129,3 +129,19 @@ export const numberSort = [
     "i",
     "t"
 ]
+
+export const numberSortWithoutJoker = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "x",
+    "j",
+    "q",
+    "k"
+]

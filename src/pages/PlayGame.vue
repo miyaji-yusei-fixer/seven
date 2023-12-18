@@ -104,9 +104,22 @@
                 outlined
                 x-large
                 color="amber"
-                @click="newGame(2)"
+                @click="newGame('2')"
               >
                 中級
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-btn
+                class="new-game-button"
+                outlined
+                x-large
+                color="amber"
+                @click="newGame('3')"
+              >
+                上級
               </v-btn>
             </v-col>
           </v-row>

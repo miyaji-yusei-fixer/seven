@@ -1,4 +1,4 @@
-import { marks, marksNumber, numberSort } from "@/utils/mark/markUtil"
+import { marks, marksNumber, numberSort, numberSortWithoutJoker } from "@/utils/mark/markUtil"
 export const Game = class {
     // デッキをシャッフル
     shuffleDeck() {
@@ -115,13 +115,26 @@ export const Game = class {
             // 手札の最大の数字と数字が捨て札と一致していた時、その札は捨てない
             // ジョーカーを優先的に捨てる
             case "2":
-                console.log(numberSort
-                    .filter(mark => !mark.includes(this.discard[0][1])))
                 numberSort
                     .filter(mark => !mark.includes(this.discard[0][1]))
                     .forEach(number => {
                         if (this.enemyHands.some(mark => mark.includes(number))) {
                             selected = this.enemyHands.filter(mark => mark.includes(number))
+                            return
+                        }
+                    })
+
+                break;
+
+            // 上級（一番でかい手札を捨て、捨て札が手札に含まれない限り山札から引く）
+            // 手札の最大の数字と数字が捨て札と一致していた時、その札は捨てない
+            // ジョーカーは捨てない
+            case "3":
+                numberSortWithoutJoker
+                    .filter(mark => !mark.includes(this.discard[0][1]))
+                    .forEach(number => {
+                        if (this.enemyHands.some(mark => mark[1] == number)) {
+                            selected = this.enemyHands.filter(mark => mark[1] == number)
                             return
                         }
                     })
