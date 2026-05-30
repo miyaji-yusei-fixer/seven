@@ -99,12 +99,9 @@ export default {
   transition: transform 0.15s ease-out;
 }
 // 案B: 並び替え（枚数変化・ソート）時の横スライド
+// 退場(leave)・出現(enter)は JS フック(flyLeave/flyEnter)が制御する
 .card-move {
   transition: transform 0.45s ease;
-}
-.card-leave-active {
-  // JS フック(flyLeave)が position:fixed で制御するため z-index のみ確保
-  z-index: 10;
 }
 .field {
   padding-bottom: 12px;

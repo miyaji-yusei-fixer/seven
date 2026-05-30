@@ -26,6 +26,8 @@ export const Game = class {
     }
     // 手札を捨ててデッキから引く
     async throwAndDrawDeck(throwCards) {
+        // 引いたカードの起点（enter アニメ用）
+        this.drawSource = "deck"
         // 捨てる
         this.discard = throwCards.concat(this.discard)
         this.playerHands = this.playerHands.filter((card) => !throwCards.includes(card))
@@ -44,6 +46,8 @@ export const Game = class {
     }
     // 手札を捨てて捨て札から引く
     async throwAndDrawDiscard(throwCards) {
+        // 引いたカードの起点（enter アニメ用）
+        this.drawSource = "discard"
         // 手札から抜く
         this.playerHands = this.playerHands.filter((card) => !throwCards.includes(card))
         // 手札に取り入れる
@@ -189,6 +193,8 @@ export const Game = class {
             this.discard = this.drawDeck(1)
         }
         this.turn = 1
+        // 引いたカードの起点（"deck" / "discard"）。enter アニメの起点に使う
+        this.drawSource = "deck"
         /*
         フェーズ
         プレーヤーのフェーズ："player"
