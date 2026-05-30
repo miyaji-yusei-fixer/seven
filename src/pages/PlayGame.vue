@@ -23,6 +23,7 @@
 
     <BoardSurface
       ref="boardSurface"
+      :key="gameKey"
       v-bind="props"
       @onClickDeck="onClickDeck"
       @onClickDiscard="onClickDiscard"
@@ -173,6 +174,8 @@ export default {
     selectedCard: [],
     newGameDialog: true,
     gameResultDialog: false,
+    // 新ゲーム時に BoardSurface を再マウントし、配り直しのアニメ暴発を防ぐ
+    gameKey: 0,
   }),
   computed: {
     props() {
@@ -187,6 +190,8 @@ export default {
         hiddenSelected: this.game.enemySelect,
         deckSheets: this.game.deck.length,
         discard: this.game.discard[0],
+        // 引いたカードの起点（enter アニメ用）。Game 側で操作と同期して設定される
+        drawSource: this.game.drawSource,
       };
     },
     turn() {
@@ -202,6 +207,7 @@ export default {
   methods: {
     newGame(level) {
       this.game = new Game(level);
+      this.gameKey += 1;
       this.newGameDialog = false;
       this.gameResultDialog = false;
     },

@@ -1,11 +1,11 @@
 <template>
   <v-card flat class="field" :disabled="isDisabled" color="rgba(0,0,0,0)">
     <v-row class="hands">
-      <v-col cols="6" class="relative">
+      <v-col cols="6" class="relative deck-pile">
         <CardBack  @onClick="onClickDeck"/>
         <v-chip @click="onClickDeck" class="absolute" >{{ deckSheets }}</v-chip>
       </v-col>
-      <v-col cols="6" class="relative">
+      <v-col cols="6" class="relative discard-pile">
         <Card :mark="discard" @onClick="onClickDiscard" />
       </v-col>
     </v-row>
