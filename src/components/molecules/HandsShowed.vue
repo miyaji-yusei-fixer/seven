@@ -1,6 +1,12 @@
 <template>
   <v-card flat class="field" :disabled="isDisabled" color="rgba(0,0,0,0)">
-    <v-row class="hands">
+    <transition-group
+      tag="div"
+      name="card"
+      class="row hands"
+      @enter="onEnter"
+      @leave="onLeave"
+    >
       <v-col
         cols="1"
         v-for="(mark, i) in hands"
@@ -13,13 +19,14 @@
           @resetSelect="resetSelect"
         />
       </v-col>
-    </v-row>
+    </transition-group>
   </v-card>
 </template>
 
 <script>
 import Card from "@/components/common/Card.vue";
 import { marks } from "@/utils/mark/markUtil";
+import { flyEnter, flyLeave } from "@/utils/animation/cardFly";
 
 export default {
   components: { Card },
@@ -32,6 +39,11 @@ export default {
     isDisabled: {
       type: Boolean,
       default: false,
+    },
+    // 引いたカードがどこから来たか（"deck" / "discard"）。enter アニメの起点に使う
+    drawSource: {
+      type: String,
+      default: "deck",
     },
     hands: {
       type: Array,
@@ -66,6 +78,14 @@ export default {
     resetSelect() {
       this.selected = [];
     },
+    onEnter(el, done) {
+      const selector =
+        this.drawSource === "discard" ? ".discard-pile" : ".deck-pile";
+      flyEnter(el, done, selector);
+    },
+    onLeave(el, done) {
+      flyLeave(el, done, ".discard-pile");
+    },
   },
 };
 </script>
@@ -76,8 +96,15 @@ export default {
 }
 .card-selected {
   transform: translateY(-24px);
-  // ヌルっと動かせるけどカード移動のアニメーションが実装だるいから入れない
-  // transition: 0.1s all ease-out;
+  transition: transform 0.15s ease-out;
+}
+// 案B: 並び替え（枚数変化・ソート）時の横スライド
+.card-move {
+  transition: transform 0.45s ease;
+}
+.card-leave-active {
+  // JS フック(flyLeave)が position:fixed で制御するため z-index のみ確保
+  z-index: 10;
 }
 .field {
   padding-bottom: 12px;

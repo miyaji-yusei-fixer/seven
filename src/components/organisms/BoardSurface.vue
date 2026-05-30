@@ -29,6 +29,7 @@
         ref="handsShowed"
         :isDisabled="isDisabledHands"
         :hands="playerHands"
+        :drawSource="drawSource"
         @selectCard="selectCard"
       />
     </v-row>
@@ -81,6 +82,10 @@ export default {
     isDisabledHands: {
       type: Boolean,
       default: false,
+    },
+    drawSource: {
+      type: String,
+      default: "deck",
     },
   },
   methods: {

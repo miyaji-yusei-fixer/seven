@@ -23,10 +23,12 @@
 
     <BoardSurface
       ref="boardSurface"
+      :key="gameKey"
       v-bind="props"
       @onClickDeck="onClickDeck"
       @onClickDiscard="onClickDiscard"
       @selectCard="selectCard"
+      :drawSource="drawSource"
       :isDisabledDeck="isDisabledDeck"
       :isDisabledHands="phase != 'player'"
     />
@@ -173,6 +175,10 @@ export default {
     selectedCard: [],
     newGameDialog: true,
     gameResultDialog: false,
+    // 引いたカードの起点（enter アニメ用）。山札="deck" / 捨て札="discard"
+    drawSource: "deck",
+    // 新ゲーム時に BoardSurface を再マウントし、配り直しのアニメ暴発を防ぐ
+    gameKey: 0,
   }),
   computed: {
     props() {
@@ -202,11 +208,14 @@ export default {
   methods: {
     newGame(level) {
       this.game = new Game(level);
+      this.drawSource = "deck";
+      this.gameKey += 1;
       this.newGameDialog = false;
       this.gameResultDialog = false;
     },
     async onClickDeck() {
       this.$refs.boardSurface.resetSelect();
+      this.drawSource = "deck";
       const result = await this.game.throwAndDrawDeck(this.selectedCard);
       this.selectedCard = [];
       if (typeof result == "string") {
@@ -217,6 +226,7 @@ export default {
     },
     async onClickDiscard() {
       this.$refs.boardSurface.resetSelect();
+      this.drawSource = "discard";
       const result = await this.game.throwAndDrawDiscard(this.selectedCard);
       this.selectedCard = [];
       if (typeof result == "string") {

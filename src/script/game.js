@@ -163,6 +163,8 @@ export const Game = class {
             this.enemyThrowAndDrawDeck(selected)
         }
         this.enemySelect = []
+        // 捨て→引きのアニメーションが見えるよう少し待つ
+        await waitSecond(0.5)
         if (this.checkResult(this.enemyHands)) {
             this.phase = "finished"
             return "相手の勝ち..."

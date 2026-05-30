@@ -1,6 +1,6 @@
 <template>
   <v-card flat class="field" color="rgba(0,0,0,0)">
-    <v-row class="hands">
+    <transition-group tag="div" name="card" class="row hands">
       <v-col
         cols="1"
         v-for="(card, i) in hands"
@@ -9,7 +9,7 @@
       >
         <CardBack />
       </v-col>
-    </v-row>
+    </transition-group>
   </v-card>
 </template>
 
@@ -44,6 +44,24 @@ export default {
 }
 .card-selected {
   transform: translateY(-24px);
+  transition: transform 0.15s ease-out;
+}
+// 並び替え（枚数変化）時の横スライド
+.card-move {
+  transition: transform 0.45s ease;
+}
+// 相手カードの出現/退場フェード（回転コンテナ内のため CSS で完結）
+.card-enter-active,
+.card-leave-active {
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.card-enter,
+.card-leave-to {
+  opacity: 0;
+  transform: translateY(-24px) scale(0.8);
+}
+.card-leave-active {
+  position: absolute;
 }
 .field {
   padding: 12px;
